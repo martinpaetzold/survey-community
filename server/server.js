@@ -6,6 +6,7 @@ const app = express();
 const csurf = require("csurf");
 const db = require("../database.js");
 const { hash, compare } = require("../password.js");
+const ses = require("../ses.js");
 
 let secret;
 process.env.NODE_ENV === "production"
@@ -92,6 +93,18 @@ app.post("/registration", (req, res) => {
         })
         .catch((error) => {
             console.log("error during hash: ", error);
+        });
+});
+
+app.get("/send-test-mail", (req, res) => {
+    ses.sendEmail()
+        .then(() => {
+            console.log("sendMail successful.");
+            res.json({ error: false });
+        })
+        .catch((error) => {
+            console.log("error sendMail: ", error);
+            res.json({ error: true });
         });
 });
 
