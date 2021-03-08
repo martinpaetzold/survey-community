@@ -95,8 +95,10 @@ export default class Registration extends Component {
                     <button onClick={(e) => this.handleClick(e)}>
                         Register now
                     </button>
-                    Already have an account?{" "}
-                    <Link to="/login">Click here to Log in!</Link>
+                    <p>
+                        Already have an account?{" "}
+                        <Link to="/login">Click here to Log in!</Link>
+                    </p>
                 </div>
             </div>
         );

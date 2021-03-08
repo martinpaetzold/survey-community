@@ -13,21 +13,21 @@ const ses = new aws.SES({
     region: "eu-west-1",
 });
 
-exports.sendEmail = function () {
+exports.sendEmail = function (mailto, message, subject) {
     return ses
         .sendEmail({
             Source: "martin <holly.face@spicedling.email>",
             Destination: {
-                ToAddresses: ["holly.face@spicedling.email"],
+                ToAddresses: [mailto],
             },
             Message: {
                 Body: {
                     Text: {
-                        Data: "Yay! This is an E-Mail to test the process.",
+                        Data: message,
                     },
                 },
                 Subject: {
-                    Data: "Mail from the awesome social network",
+                    Data: subject,
                 },
             },
         })

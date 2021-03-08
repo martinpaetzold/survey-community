@@ -4,6 +4,7 @@ const path = require("path");
 const cookieSession = require("cookie-session");
 const app = express();
 const csurf = require("csurf");
+const cryptoRandomString = require("crypto-random-string");
 const db = require("../database.js");
 const { hash, compare } = require("../password.js");
 const ses = require("../ses.js");
@@ -54,25 +55,30 @@ app.post("/login", (req, res) => {
     } else {
         // 2.load user with this email address from db
         //react to not existing user
-        db.getUserByEmail(email).then((results) => {
-            if (results.rows.length == 0) {
-                //NO user found with this email address
-                res.json({ error: "Email and password not correct.." });
-            }
-            // 3.compare passwords
-            const user = results.rows[0];
-            compare(password, user.password_hash).then((valid) => {
-                if (!valid) {
-                    res.json({ error: "Email and password not correct." });
+        db.getUserByEmail(email)
+            .then((results) => {
+                if (results.rows.length == 0) {
+                    //NO user found with this email address
+                    res.json({ error: "Email and password not correct.." });
                 }
-                // 4.write user info to session
-                console.log("Login successful.");
-                // req.session.user = user;
-                console.log("req.session.userId");
-                req.session.userId = user.id;
-                res.json({ error: false, login: true });
+                // 3.compare passwords
+                const user = results.rows[0];
+                compare(password, user.password_hash).then((valid) => {
+                    if (!valid) {
+                        res.json({ error: "Email and password not correct." });
+                    }
+                    // 4.write user info to session
+                    console.log("Login successful.");
+                    // req.session.user = user;
+                    console.log("req.session.userId");
+                    req.session.userId = user.id;
+                    res.json({ error: false, login: true });
+                });
+            })
+            .catch((error) => {
+                console.log("getUserByEmail: ", error);
+                res.json({ error: true });
             });
-        });
     }
 });
 
@@ -96,8 +102,10 @@ app.post("/registration", (req, res) => {
         });
 });
 
+//just for test sendMail
+/*
 app.get("/send-test-mail", (req, res) => {
-    ses.sendEmail()
+    ses.sendEmail("holly.face@spicedling.email", "Message TEST", "Subject TEST")
         .then(() => {
             console.log("sendMail successful.");
             res.json({ error: false });
@@ -107,11 +115,80 @@ app.get("/send-test-mail", (req, res) => {
             res.json({ error: true });
         });
 });
+*/
+
+app.post("/user/reset-password/start", (req, res) => {
+    const { email } = req.body;
+    //let email = "holly.face@spicedling.email";
+    db.getUserByEmail(email)
+        .then(({ rows }) => {
+            if (rows.length > 0) {
+                const resetCode = cryptoRandomString({
+                    length: 8,
+                });
+                console.log(email);
+                console.log(resetCode);
+                db.addPWDResetcode(email, resetCode)
+                    .then(() => {
+                        var subj = "Social Network Password Reset";
+                        var msg = "your resetcode:" + resetCode;
+                        ses.sendEmail(email, msg, subj)
+                            .then(() => {
+                                res.json({ success: true, error: false });
+                            })
+                            .catch((error) => {
+                                console.log("error in sendEmail", error);
+                                res.json({ error: true });
+                            });
+                    })
+                    .catch((error) => {
+                        console.log("error in addCode", error);
+                        res.json({ error: true });
+                    });
+            } else {
+                res.json({ error: true });
+            }
+        })
+        .catch((error) => {
+            console.log("error in getUserEmail", error);
+            res.json({ error: true });
+        });
+});
+
+app.post("/user/reset-password/add-new", (req, res) => {
+    console.log(req.body);
+    const { email, resetCode, password } = req.body;
+    db.getCodeFromDB(email)
+        .then(({ rows }) => {
+            console.log(rows);
+            if (resetCode === rows[0].reset_code) {
+                console.log("code/email exists");
+                hash(password).then((hashedPw) => {
+                    db.addNewPWDToDB(email, hashedPw)
+                        .then(({ rows }) => {
+                            console.log("editPassword worked", rows);
+                            res.json({ success: true });
+                        })
+                        .catch((error) => {
+                            console.log("error in editPassword", error);
+                            res.json({ error: true });
+                        });
+                });
+            } else {
+                console.log("code doesn't match");
+                res.json({ error: true });
+            }
+        })
+        .catch((error) => {
+            console.log("error in getCode: ", error);
+            res.json({ error: true });
+        });
+});
 
 app.get("/logout", (req, res) => {
     //checkLoginStatus
     if (!req.session.userId) {
-        return res.redirect(302, "/register");
+        return res.redirect(302, "/login");
     }
 
     req.session = null;
