@@ -61,3 +61,12 @@ exports.addNewPWDToDB = (email, password) => {
     const params = [email, password];
     return db.query(q, params);
 };
+
+exports.removeOldPWDResets = () => {
+    const q = `
+        DELETE
+        FROM user_reset_pwd
+        WHERE CURRENT_TIMESTAMP - created_ts > INTERVAL '1 hours';
+        `;
+    return db.query(q);
+};

@@ -5,6 +5,7 @@ const cookieSession = require("cookie-session");
 const app = express();
 const csurf = require("csurf");
 const cryptoRandomString = require("crypto-random-string");
+var cron = require("node-cron");
 const db = require("../database.js");
 const { hash, compare } = require("../password.js");
 const ses = require("../ses.js");
@@ -13,6 +14,12 @@ let secret;
 process.env.NODE_ENV === "production"
     ? (secret = process.env)
     : (secret = require("../secrets.json"));
+
+//cron job to remove old pwd resets from DB
+cron.schedule("0 0 */1 * * *", () => {
+    console.log("running the task every hour.");
+    db.removeOldPWDResets();
+});
 
 app.use(
     express.json({
