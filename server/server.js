@@ -45,6 +45,36 @@ app.get("/welcome", (req, res) => {
     }
 });
 
+app.post("/login", (req, res) => {
+    // 1.check if user fill out fields
+    const { email, password } = req.body;
+    if (!email || !password) {
+        res.json({ error: true });
+    } else {
+        // 2.load user with this email address from db
+        //react to not existing user
+        db.getUserByEmail(email).then((results) => {
+            if (results.rows.length == 0) {
+                //NO user found with this email address
+                res.json({ error: "Email and password not correct.." });
+            }
+            // 3.compare passwords
+            const user = results.rows[0];
+            compare(password, user.password_hash).then((valid) => {
+                if (!valid) {
+                    res.json({ error: "Email and password not correct." });
+                }
+                // 4.write user info to session
+                console.log("Login successful.");
+                // req.session.user = user;
+                console.log("req.session.userId");
+                req.session.userId = user.id;
+                res.json({ error: false, login: true });
+            });
+        });
+    }
+});
+
 app.post("/registration", (req, res) => {
     const { first, last, email, password } = req.body;
     hash(password)
@@ -63,6 +93,16 @@ app.post("/registration", (req, res) => {
         .catch((error) => {
             console.log("error during hash: ", error);
         });
+});
+
+app.get("/logout", (req, res) => {
+    //checkLoginStatus
+    if (!req.session.userId) {
+        return res.redirect(302, "/register");
+    }
+
+    req.session = null;
+    res.redirect("/");
 });
 
 app.get("*", function (req, res) {

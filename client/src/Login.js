@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "./axios";
 
-export default class Registration extends Component {
+export default class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -30,7 +30,7 @@ export default class Registration extends Component {
         console.log("handleClick ", this.state);
         // e.preventDefault();
         axios
-            .post("/registration", this.state)
+            .post("/login", this.state)
             .then(({ data }) => {
                 console.log("data", data);
                 if (data.error) {
@@ -42,38 +42,20 @@ export default class Registration extends Component {
                 }
             })
             .catch((error) => {
-                console.log("error on /registration: ", error);
+                console.log("error on /login: ", error);
             });
     }
 
     render() {
         return (
             <div className="registerField">
-                <h2>Registration</h2>
+                <h2>Login</h2>
                 {this.state.error && (
                     <p className="errorMessage">
                         Something went wrong. Please try again.
                     </p>
                 )}
                 <div className="formField">
-                    <label>
-                        First Name
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="first"
-                            placeholder="First Name"
-                            type="text"
-                        />
-                    </label>
-                    <label>
-                        Last Name
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="last"
-                            placeholder="Last Name"
-                            type="text"
-                        />
-                    </label>
                     <label>
                         Email
                         <input
@@ -93,10 +75,12 @@ export default class Registration extends Component {
                         />
                     </label>
                     <button onClick={(e) => this.handleClick(e)}>
-                        Register now
+                        Login now
                     </button>
-                    Already have an account?{" "}
-                    <Link to="/login">Click here to Log in!</Link>
+                    <p>
+                        Don't have an account yet?{" "}
+                        <Link to="/">Click here to Register.</Link>
+                    </p>
                 </div>
             </div>
         );
