@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "./axios";
+import axios from "./axios.js";
 
 export default class Registration extends Component {
     constructor() {

@@ -70,3 +70,23 @@ exports.removeOldPWDResets = () => {
         `;
     return db.query(q);
 };
+
+exports.getUserProfile = (userId) => {
+    const q = `
+        SELECT id, user_id, profile_picture_url
+        FROM user_profiles
+        WHERE user_id = $1;
+        `;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+exports.editProfilePic = (userId, url) => {
+    const q = `
+        UPDATE user_profiles
+        SET profile_picture_url=$2
+        WHERE user_id=$1;
+        `;
+    const params = [userId, url];
+    return db.query(q, params);
+};

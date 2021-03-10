@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import Welcome from "./welcome";
+import Welcome from "./welcome.js";
 
 let elem;
 if (location.pathname === "/welcome") {
