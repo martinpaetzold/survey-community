@@ -6,9 +6,13 @@ const app = express();
 const csurf = require("csurf");
 const cryptoRandomString = require("crypto-random-string");
 const cron = require("node-cron");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
 const db = require("../database.js");
 const { hash, compare } = require("../password.js");
 const ses = require("../ses.js");
+const s3 = require("../s3.js");
+const { s3Url } = require("../config.json");
 
 let secret;
 process.env.NODE_ENV === "production"
@@ -20,6 +24,26 @@ process.env.NODE_ENV === "production"
 cron.schedule("0 0 */1 * * *", () => {
     console.log("Clean up the DB.");
     db.removeOldPWDResets();
+});
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
 });
 
 app.use(
@@ -192,6 +216,41 @@ app.post("/user/reset-password/add-new", (req, res) => {
             res.json({ error: true });
         });
 });
+
+app.get("/user/profile", (req, res) => {
+    db.getUserProfile(req.session.userId)
+        .then((results) => {
+            console.log(req.session.userId, results.rows[0]);
+            delete results.rows[0].password_hash;
+            console.log(results.rows[0]);
+            res.json(results.rows[0]);
+        })
+        .catch((error) => {
+            console.log("error in /profile - getUserProfile", error);
+            res.json({ error: true });
+        });
+});
+
+app.post(
+    "/user/profile/upload",
+    uploader.single("image"),
+    s3.upload,
+    (req, res) => {
+        if (req.file) {
+            const url = `${s3Url}${req.file.filename}`;
+            db.editProfilePic(req.session.userId, url)
+                .then(() => {
+                    res.json({ sucess: true, url: url });
+                })
+                .catch((error) => {
+                    console.log("error editProfilePic: ", error);
+                    res.json({ error: true });
+                });
+        } else {
+            res.json({ error: true });
+        }
+    }
+);
 
 app.get("/logout", (req, res) => {
     //checkLoginStatus

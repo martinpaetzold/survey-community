@@ -73,9 +73,10 @@ exports.removeOldPWDResets = () => {
 
 exports.getUserProfile = (userId) => {
     const q = `
-        SELECT id, user_id, profile_picture_url
-        FROM user_profiles
-        WHERE user_id = $1;
+        SELECT * FROM users
+        FULL OUTER JOIN user_profiles
+        ON user_profiles.user_id = users.id
+        WHERE id= $1;
         `;
     const params = [userId];
     return db.query(q, params);
@@ -83,9 +84,13 @@ exports.getUserProfile = (userId) => {
 
 exports.editProfilePic = (userId, url) => {
     const q = `
-        UPDATE user_profiles
-        SET profile_picture_url=$2
-        WHERE user_id=$1;
+        INSERT INTO user_profiles
+            (user_id, profile_picture_url)
+        VALUES
+            ($1, $2)
+        ON CONFLICT (user_id)
+        DO UPDATE SET profile_picture_url=$2
+        WHERE user_profiles.user_id=$1;
         `;
     const params = [userId, url];
     return db.query(q, params);

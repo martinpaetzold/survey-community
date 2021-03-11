@@ -19,7 +19,23 @@ CREATE TABLE user_reset_pwd (
 );
 
 CREATE TABLE user_profiles (
-    id SERIAL PRIMARY KEY,
+    id_profiles SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) UNIQUE,
     profile_picture_url VARCHAR(255) NOT NULL
 );
+
+-- Test JOIN
+SELECT * FROM users
+FULL OUTER JOIN user_profiles
+ON user_profiles.user_id = users.id
+WHERE id=10;
+
+-- Test INSERT
+INSERT INTO user_profiles
+            (user_id, profile_picture_url)
+        VALUES
+            (10, 'http://www.mpaetzold.de')
+        ON CONFLICT (user_id) DO
+            UPDATE
+                SET profile_picture_url='http://www.mpaetzold.de/test.jpg'
+        WHERE user_profiles.user_id=10;
