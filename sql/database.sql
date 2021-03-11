@@ -39,3 +39,13 @@ INSERT INTO user_profiles
             UPDATE
                 SET profile_picture_url='http://www.mpaetzold.de/test.jpg'
         WHERE user_profiles.user_id=10;
+
+-- Part V
+CREATE TABLE user_profiles (
+    id_profiles SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) UNIQUE,
+    profile_picture_url VARCHAR(255) NOT NULL,
+    short_bio VARCHAR(255),
+);
+
+ALTER TABLE user_profiles ADD COLUMN short_bio VARCHAR(255);
