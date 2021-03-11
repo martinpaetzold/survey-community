@@ -7,7 +7,7 @@ export default function ProfilePic({
     toggleUploader,
 }) {
     return (
-        <div className="profile-corner">
+        <div>
             {!profilePic && (
                 <img
                     onClick={() => toggleUploader()}

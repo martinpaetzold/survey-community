@@ -221,8 +221,9 @@ app.get("/user/profile", (req, res) => {
     db.getUserProfile(req.session.userId)
         .then((results) => {
             console.log(req.session.userId, results.rows[0]);
-            delete results.rows[0].password_hash;
-            console.log(results.rows[0]);
+            //removed password_hash from query
+            //delete results.rows[0].password_hash;
+            //console.log(results.rows[0]);
             res.json(results.rows[0]);
         })
         .catch((error) => {
@@ -251,6 +252,22 @@ app.post(
         }
     }
 );
+
+app.post("/user/profile/shortbio", (req, res) => {
+    console.log("POST /user/profile/shortbio", req.body);
+    const { draftBio } = req.body;
+    db.editProfileBio(req.session.userId, draftBio)
+        .then(() => {
+            res.json({
+                success: true,
+                bio: draftBio,
+            });
+        })
+        .catch((error) => {
+            console.log("error in shortbio", error);
+            res.json({ error: true });
+        });
+});
 
 app.get("/logout", (req, res) => {
     //checkLoginStatus

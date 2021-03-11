@@ -108,3 +108,21 @@ h2 {
     margin-top: 10px;
     font-weight: bold;
 }
+
+.profile-bio {
+    padding: 20px;
+}
+
+.profile-bio p {
+    padding: 0px;
+}
+
+.profile-bio button {
+    display: inline;
+    margin: 10px;
+}
+
+.profile-bio textarea {
+    display: block;
+    width: 200px;
+}

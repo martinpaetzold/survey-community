@@ -21,7 +21,7 @@ CREATE TABLE user_reset_pwd (
 CREATE TABLE user_profiles (
     id_profiles SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) UNIQUE,
-    profile_picture_url VARCHAR(255) NOT NULL
+    profile_picture_url VARCHAR(255)
 );
 
 -- Test JOIN
@@ -44,8 +44,8 @@ INSERT INTO user_profiles
 CREATE TABLE user_profiles (
     id_profiles SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) UNIQUE,
-    profile_picture_url VARCHAR(255) NOT NULL,
-    short_bio VARCHAR(255),
+    profile_picture_url VARCHAR(255),
+    short_bio VARCHAR(255)
 );
 
 ALTER TABLE user_profiles ADD COLUMN short_bio VARCHAR(255);
