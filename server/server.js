@@ -5,7 +5,7 @@ const cookieSession = require("cookie-session");
 const app = express();
 const csurf = require("csurf");
 const cryptoRandomString = require("crypto-random-string");
-const cron = require("node-cron");
+// const cron = require("node-cron");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const db = require("../database.js");
@@ -21,10 +21,10 @@ process.env.NODE_ENV === "production"
 
 //cron job to remove old pwd resets from DB
 //todo: dont use it for heroku. use heroku scheduler instead.
-cron.schedule("0 0 */1 * * *", () => {
-    console.log("Clean up the DB.");
-    db.removeOldPWDResets();
-});
+//cron.schedule("0 0 */1 * * *", () => {
+//    console.log("Clean up the DB.");
+//    db.removeOldPWDResets();
+//});
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
