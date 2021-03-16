@@ -279,6 +279,32 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
+app.get("/api/user", (req, res) => {
+    db.getUserProfile(req.session.userId)
+        .then(({ rows }) => {
+            res.json(rows[0]);
+        })
+        .catch((error) => {
+            console.log("error GET /api/user", error);
+            res.json({ error: true });
+        });
+});
+
+app.get("/api/user/:id", (req, res) => {
+    const { id } = req.params;
+    console.log("request made", id);
+    db.getUserProfile(id)
+        .then(({ rows }) => {
+            rows[0]["loggedId"] = req.session.userId;
+            console.log(rows[0]);
+            res.json(rows[0]);
+        })
+        .catch((error) => {
+            console.log("error getUserProfile:", error);
+            res.json({ error: true });
+        });
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
