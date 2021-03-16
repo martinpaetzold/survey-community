@@ -305,6 +305,18 @@ app.get("/api/user/:id", (req, res) => {
         });
 });
 
+app.get("/api/user/search/:query", (req, res) => {
+    console.log(req.params.query);
+    db.getMatchingPeople(req.params.query)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("user search error:", error);
+            res.json({ error: true });
+        });
+});
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");

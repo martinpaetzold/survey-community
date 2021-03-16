@@ -109,3 +109,15 @@ exports.editProfileBio = (userId, shortBio) => {
     const params = [userId, shortBio];
     return db.query(q, params);
 };
+
+exports.getMatchingPeople = (val) => {
+    const q = `
+        SELECT id, firstname, lastname, email, short_bio, profile_picture_url FROM users
+        FULL OUTER JOIN user_profiles
+        ON user_profiles.user_id = users.id
+        WHERE firstname ILIKE $1 OR lastname ILIKE $1
+        LIMIT 8;
+        `;
+    const params = ["%" + val + "%"];
+    return db.query(q, params);
+};
