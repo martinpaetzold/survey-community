@@ -126,3 +126,24 @@ h2 {
     display: block;
     width: 200px;
 }
+
+.profile-search-results-wrap {
+    display: block;
+    padding-left: 20px;
+}
+
+.profile-search-results-wrap img {
+    display: inline;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.profile-search-results-wrap p {
+    display: inline;
+}
+
+.profile-search-input {
+    margin: 20px;
+    width: 80%;
+}

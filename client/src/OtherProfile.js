@@ -1,5 +1,5 @@
 import { Component } from "react";
-import axios from "./axios";
+import axios from "./axios.js";
 
 export default class OtherProfile extends Component {
     constructor() {

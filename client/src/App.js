@@ -3,7 +3,8 @@ import axios from "./axios";
 import ProfilePicture from "./ProfilePicture.js";
 import Uploader from "./Uploader.js";
 import Profile from "./Profile.js";
-import OtherProfile from "./OtherProfile";
+import OtherProfile from "./OtherProfile.js";
+import ProfileSearch from "./ProfileSearch.js";
 import { BrowserRouter, Route } from "react-router-dom";
 
 export default class App extends Component {
@@ -21,16 +22,22 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        axios.get("/user/profile").then(({ data }) => {
-            this.setState({
-                id: data.id,
-                first: data.firstname,
-                last: data.lastname,
-                email: data.email,
-                bio: data.short_bio,
-                profilePic: data.profile_picture_url,
+        axios
+            .get("/user/profile")
+            .then(({ data }) => {
+                this.setState({
+                    id: data.id,
+                    first: data.firstname,
+                    last: data.lastname,
+                    email: data.email,
+                    bio: data.short_bio,
+                    profilePic: data.profile_picture_url,
+                });
+            })
+            .catch((error) => {
+                console.log("error", error);
+                this.props.history.push("/");
             });
-        });
     }
 
     toggleUploader() {
@@ -55,7 +62,7 @@ export default class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div>
+                <>
                     <h1>Hello, {this.state.first}!</h1>
                     <h2>Nice to see you again.</h2>
                     <div className="profile-corner">
@@ -67,6 +74,29 @@ export default class App extends Component {
                             toggleUploader={() => this.toggleUploader()}
                         />
                     </div>
+
+                    <Route
+                        exact
+                        path="/user/:id"
+                        render={(props) => (
+                            <OtherProfile
+                                match={props.match}
+                                key={props.match.url}
+                                history={props.history}
+                            />
+                        )}
+                    />
+
+                    <Route
+                        path="/users"
+                        render={(props) => (
+                            <ProfileSearch
+                                match={props.match}
+                                key={props.match.url}
+                                history={props.history}
+                            />
+                        )}
+                    />
 
                     <Route
                         exact
@@ -84,17 +114,6 @@ export default class App extends Component {
                         )}
                     />
 
-                    <Route
-                        path="/user/:id"
-                        render={(props) => (
-                            <OtherProfile
-                                match={props.match}
-                                key={props.match.url}
-                                history={props.history}
-                            />
-                        )}
-                    />
-
                     {this.state.uploaderIsVisible && (
                         <Uploader
                             image={this.state.image}
@@ -102,7 +121,7 @@ export default class App extends Component {
                             toggleUploader={() => this.toggleUploader()}
                         />
                     )}
-                </div>
+                </>
             </BrowserRouter>
         );
     }

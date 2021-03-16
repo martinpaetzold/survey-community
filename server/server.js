@@ -290,6 +290,17 @@ app.get("/api/user", (req, res) => {
         });
 });
 
+app.get("/api/user/latest", (req, res) => {
+    db.getUsers()
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("/api/user/latest error: ", error);
+            res.json({ error: true });
+        });
+});
+
 app.get("/api/user/:id", (req, res) => {
     const { id } = req.params;
     console.log("request made", id);
