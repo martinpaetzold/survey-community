@@ -49,3 +49,14 @@ CREATE TABLE user_profiles (
 );
 
 ALTER TABLE user_profiles ADD COLUMN short_bio VARCHAR(255);
+
+-- PART VII
+DROP TABLE IF EXISTS user_requests;
+
+CREATE TABLE user_requests (
+    id_requests SERIAL PRIMARY KEY,
+    sender_id INT REFERENCES users(id) NOT NULL,
+    receiver_id INT REFERENCES users(id) NOT NULL,
+    accepted BOOLEAN DEFAULT false,
+    created_ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

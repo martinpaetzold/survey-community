@@ -1,6 +1,6 @@
 import { Component } from "react";
 import App from "./App";
-import axios from "./axios";
+import axios from "./axios.js";
 
 export default class Uploader extends Component {
     constructor(props) {
@@ -45,17 +45,20 @@ export default class Uploader extends Component {
 
     toggleUploader() {
         this.setState({
-            uploaderIsVisible: !this.state.uploaderIsVisible,
+            uploaderIsVisible: !this.props.uploaderIsVisible,
         });
     }
 
     render() {
-        const { closeHandler } = this.props;
-        console.log("props > uploader", this.props);
+        //const { closeHandler } = this.props;
+        //console.log("props > uploader", this.props);
         return (
             <div className="uploader_wrapper">
                 <div className="uploader">
-                    <div className="close" onClick={closeHandler}>
+                    <div
+                        className="close"
+                        onClick={() => this.props.toggleUploader()}
+                    >
                         close it!
                     </div>
                     <h1>Uploader</h1>
