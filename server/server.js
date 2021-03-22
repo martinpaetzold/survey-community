@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const express = require("express");
 const compression = require("compression");
 const path = require("path");
@@ -327,6 +328,69 @@ app.get("/api/user/search/:query", (req, res) => {
             res.json({ error: true });
         });
 });
+
+// request part -------------------------------------------------------------------->
+const STATUS_NO_REQUEST = "no-request";
+const STATUS_REQUEST_MADE_BY_YOU = "request-made-by-you";
+const STATUS_REQUEST_MADE_TO_YOU = "request-made-to-you";
+const STATUS_ACCEPTED = "request-accepted";
+
+app.get("/api/requests/friends/:userIdOther", async (req, res) => {
+    const userId = req.session.userId;
+    const { id } = req.params;
+
+    const result = await db.getRequestStatus(userId, id);
+    const friendRequest = result.rows.length > 0 ? result.rows[0] : false;
+
+    if (!friendRequest) {
+        // Friend request not found
+        res.json({ status: STATUS_NO_REQUEST });
+    } else if (friendRequest.accepted == true) {
+        // Friend request accepted
+        res.json({ status: STATUS_ACCEPTED });
+    } else if (friendRequest.from_id == userId) {
+        // Friend request not accepted, and made by user
+        res.json({ status: STATUS_REQUEST_MADE_BY_YOU });
+    } else {
+        // Friend request not accepted, and made by other user
+        res.json({ status: STATUS_REQUEST_MADE_TO_YOU });
+    }
+});
+
+const ACTION_MAKE_REQUEST = "make-request";
+const ACTION_CANCEL_REQUEST = "cancel";
+const ACTION_ACCEPT_REQUEST = "accept";
+const ACTION_UNFRIEND = "unfriend";
+
+app.post("/api/requests/friends/:action/:userIdOther", async (req, res) => {
+    const userId = req.session.userId;
+    const { userIdOther, action } = req.params;
+
+    switch (action) {
+        case ACTION_MAKE_REQUEST:
+            await db.requestMake(userId, userIdOther);
+            res.json({ newStatus: STATUS_REQUEST_MADE_BY_YOU });
+            break;
+
+        case ACTION_CANCEL_REQUEST:
+            await db.requestCancel(userId, userIdOther);
+            res.json({ newStatus: STATUS_NO_REQUEST });
+            break;
+
+        case ACTION_ACCEPT_REQUEST:
+            await db.RequestAccepted(userId, userIdOther);
+            res.json({ newStatus: STATUS_ACCEPTED });
+            break;
+
+        case ACTION_UNFRIEND:
+            await db.deleteFriendRequest(userId, userIdOther);
+            res.json({ newStatus: STATUS_NO_REQUEST });
+            break;
+        default:
+            res.status(400).json({ error: "Action not recognized." });
+    }
+});
+// request part -------------------------------------------------------------------->
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

@@ -132,3 +132,46 @@ exports.getMatchingPeople = (val) => {
     const params = ["%" + val + "%"];
     return db.query(q, params);
 };
+
+exports.getRequestStatus = (userId, UserIdOtherOne) => {
+    const q = `
+        SELECT * 
+        FROM user_requests
+        WHERE (receiver_id = $1 AND sender_id = $2) 
+            OR (receiver_id = $2 AND sender_id = $1);
+        `;
+    const params = [userId, UserIdOtherOne];
+    return db.query(q, params);
+};
+
+exports.requestMake = (userId, UserIdOtherOne) => {
+    const q = `
+        INSERT INTO user_requests (sender_id, receiver_id)
+        VALUES ($1, $2)
+        RETURNING sender_id, receiver_id, accepted;
+        `;
+    const params = [userId, UserIdOtherOne];
+    return db.query(q, params);
+};
+
+exports.requestCancel = (userId, UserIdOtherOne) => {
+    const q = `
+        DELETE
+        FROM user_requests 
+        WHERE (receiver_id = $1 AND sender_id = $2) 
+            OR (receiver_id = $2 AND sender_id = $1);
+        `;
+    const params = [userId, UserIdOtherOne];
+    return db.query(q, params);
+};
+
+exports.RequestAccepted = (userId, UserIdOtherOne) => {
+    const q = `
+        UPDATE user_requests
+        SET accepted = 'true' 
+        WHERE (receiver_id = $1 AND sender_id = $2) 
+            OR (receiver_id = $2 AND sender_id = $1);
+        `;
+    const params = [userId, UserIdOtherOne];
+    return db.query(q, params);
+};

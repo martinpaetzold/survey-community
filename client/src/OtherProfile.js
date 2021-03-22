@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from "./axios.js";
+import ButtonRequestFriend from "./ButtonRequestFriend.js";
 
 export default class OtherProfile extends Component {
     constructor() {
@@ -58,6 +59,7 @@ export default class OtherProfile extends Component {
                     My name is {this.state.first} {this.state.last}
                 </h1>
                 <p>Bio: {this.state.bio}</p>
+                <ButtonRequestFriend userIdOther={this.state.id} />
             </div>
         );
     }
