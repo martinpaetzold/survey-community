@@ -6,7 +6,7 @@ import reduxPromise from "redux-promise";
 import reducer from "./reducer.js";
 import { chatMessages, chatMessage } from "./actions.js";
 import { io } from "socket.io-client";
-import Welcome from "./Welcome.js";
+import Welcome from "./welcome.js";
 import App from "./App.js";
 
 const store = createStore(

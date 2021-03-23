@@ -68,13 +68,10 @@ export default class App extends Component {
                 <>
                     <h1>Hello, {this.state.first}!</h1>
                     <h2>Nice to see you again.</h2>
-                    <div className="Navigation">
-                        <Link to={"/"}>Home</Link>
-                        <br />
+                    <div className="navigation">
+                        <Link to={"/"}>My Profile</Link>
                         <Link to={"/friends"}>Friends</Link>
-                        <br />
                         <Link to={"/chat"}>Chat</Link>
-                        <br />
                         <Link to={"/users"}>Search</Link>
                     </div>
                     <div className="profile-corner">

@@ -18,18 +18,26 @@ export default function Chat() {
         <div className="chat">
             <h1>Chat</h1>
 
-            {messages &&
-                messages.map((message) => (
-                    <Message {...message} key={message.message_id} />
-                ))}
+            <div className="message-wrap">
+                {messages &&
+                    messages.map((message) => (
+                        <Message {...message} key={message.message_id} />
+                    ))}
+            </div>
 
             <div>
                 <input
                     onChange={(e) => setDraft(e.target.value)}
                     value={draft}
                     placeholder="Type your message.."
+                    className="message-input"
                 />
-                <button onClick={(e) => handleButtonOnClick()}>Send</button>
+                <button
+                    onClick={(e) => handleButtonOnClick()}
+                    className="message-button-send"
+                >
+                    Send
+                </button>
             </div>
         </div>
     );
@@ -37,7 +45,7 @@ export default function Chat() {
 
 function Message(props) {
     return (
-        <div className="Message">
+        <div className="message">
             <span>
                 {props.firstname} {props.lastname}
             </span>

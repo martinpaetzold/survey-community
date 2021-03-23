@@ -5,7 +5,7 @@ export default function Profile(props) {
     return (
         <div>
             <h2>
-                User: {props.first} {props.last}
+                Your name: {props.first} {props.last}
             </h2>
             <ProfilePicture
                 toggleUploader={props.toggleUploader}

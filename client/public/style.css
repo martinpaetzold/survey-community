@@ -147,3 +147,40 @@ h2 {
     margin: 20px;
     width: 80%;
 }
+
+.chat .message {
+    padding-left: 20px;
+}
+
+/*
+.message-wrap {
+    height: 200px;
+    overflow-y: scroll;
+}
+*/
+
+.message-input {
+    margin: 20px;
+    width: 80%;
+}
+
+.message-button-send {
+    margin-left: 20px;
+}
+
+.navigation {
+    display: inline;
+    margin-left: 20px;
+}
+
+.navigation a {
+    padding-right: 10px;
+}
+
+.wantFriend {
+    margin-left: 20px;
+}
+
+.friend {
+    margin-left: 20px;
+}
