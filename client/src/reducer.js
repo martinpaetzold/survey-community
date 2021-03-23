@@ -1,4 +1,10 @@
-import { LOAD_FRIENDS, ACCEPT_FRIEND, UNFRIEND } from "./actions.js";
+import {
+    LOAD_FRIENDS,
+    ACCEPT_FRIEND,
+    UNFRIEND,
+    ACTION_CHAT_MESSAGE,
+    CHAT_MESSAGES,
+} from "./actions.js";
 
 export default function (state = {}, action) {
     if (action.type == LOAD_FRIENDS) {
@@ -30,6 +36,20 @@ export default function (state = {}, action) {
                     return true;
                 }
             }),
+        };
+    }
+
+    if (action.type == ACTION_CHAT_MESSAGE) {
+        state = {
+            ...state,
+            messages: [...state.messages, ...action.messages],
+        };
+    }
+
+    if (action.type == CHAT_MESSAGES) {
+        state = {
+            ...state,
+            messages: action.messages,
         };
     }
 

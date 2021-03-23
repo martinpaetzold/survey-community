@@ -3,6 +3,8 @@ import axios from "./axios.js";
 export const LOAD_FRIENDS = "load friends";
 export const ACCEPT_FRIEND = "accept friend";
 export const UNFRIEND = "unfriend friend";
+export const ACTION_CHAT_MESSAGE = "chat message";
+export const CHAT_MESSAGES = "chat messages";
 
 export const loadFriends = async () => {
     const result = await axios.get("/api/wannabes");
@@ -32,5 +34,19 @@ export const unFriend = async (otherID) => {
     return {
         type: UNFRIEND,
         friends: statusFriendRequest,
+    };
+};
+
+export const chatMessages = async (messages) => {
+    return {
+        type: CHAT_MESSAGES,
+        messages,
+    };
+};
+
+export const chatMessage = async (message) => {
+    return {
+        type: ACTION_CHAT_MESSAGE,
+        messages: message,
     };
 };

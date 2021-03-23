@@ -1,9 +1,14 @@
-/* eslint-disable indent */
 const express = require("express");
+const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
-const app = express();
+
 const csurf = require("csurf");
 const cryptoRandomString = require("crypto-random-string");
 // const cron = require("node-cron");
@@ -53,12 +58,16 @@ app.use(
     })
 );
 
-app.use(
-    cookieSession({
-        secret: `${secret}`,
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
-    })
-);
+const cookieSessionMiddleware = cookieSession({
+    secret: `${secret}`,
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
+});
+
+app.use(cookieSessionMiddleware);
+
+io.use((socket, next) => {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 
@@ -67,6 +76,40 @@ app.use(function (req, res, next) {
     res.cookie("mytoken", req.csrfToken());
     next();
 });
+
+// socket.io -------------------------------------------------------------------->
+io.on("connection", async (socket) => {
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    console.log("Socket id now connected: ", socket.id);
+    const userId = socket.request.session.userId;
+    console.log("UID: ", userId);
+
+    const lastMessages = await db.getMostRecentChatmessages();
+    console.log("lastMessages ", lastMessages.rows);
+    socket.emit("chatMessages", lastMessages.rows);
+
+    // React on messages
+    socket.on("newMessage", async (message_text) => {
+        console.log(message_text);
+        // Save to databse
+        const result = await db.addNewChatmessage(userId, message_text);
+        const message_id = result.rows[0].id;
+        // Send messages to all connected browsers
+
+        const user = await db.getUserProfile(userId);
+        const message = {
+            ...user.rows[0],
+            message_id,
+            message_text,
+        };
+
+        io.emit("chatMessage", [message]);
+    });
+});
+
+// socket.io <--------------------------------------------------------------------
 
 app.use(compression());
 
@@ -406,6 +449,6 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening...");
 });

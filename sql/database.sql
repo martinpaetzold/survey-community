@@ -60,3 +60,25 @@ CREATE TABLE user_requests (
     accepted BOOLEAN DEFAULT false,
     created_ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- PART X
+DROP TABLE IF EXISTS user_chat_messages;
+
+CREATE TABLE user_chat_messages (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) NOT NULL,
+    message_text VARCHAR(255) NOT NULL CHECK (message_text != ''),
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO user_chat_messages (message_text, user_id) 
+VALUES ('dummy msg 1...', 10);
+INSERT INTO user_chat_messages (message_text, user_id) 
+VALUES ('dummy msg 2...', 10);
+INSERT INTO user_chat_messages (message_text, user_id) 
+VALUES ('dummy msg 3...', 10);
+
+SELECT users.id, firstname, lastname, user_id, message_text, user_chat_messages.create_at
+FROM user_chat_messages
+JOIN users
+ON user_chat_messages.user_id = users.id; 

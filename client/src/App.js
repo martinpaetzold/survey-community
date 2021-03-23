@@ -8,6 +8,7 @@ import Profile from "./Profile.js";
 import OtherProfile from "./OtherProfile.js";
 import ProfileSearch from "./ProfileSearch.js";
 import Friends from "./Friends.js";
+import Chat from "./Chat.js";
 
 export default class App extends Component {
     constructor() {
@@ -72,6 +73,8 @@ export default class App extends Component {
                         <br />
                         <Link to={"/friends"}>Friends</Link>
                         <br />
+                        <Link to={"/chat"}>Chat</Link>
+                        <br />
                         <Link to={"/users"}>Search</Link>
                     </div>
                     <div className="profile-corner">
@@ -133,6 +136,8 @@ export default class App extends Component {
                             />
                         )}
                     />
+
+                    <Route path={"/chat"} exact component={Chat} />
 
                     {this.state.uploaderIsVisible && (
                         <Uploader
