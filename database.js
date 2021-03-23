@@ -175,3 +175,17 @@ exports.RequestAccepted = (userId, UserIdOtherOne) => {
     const params = [userId, UserIdOtherOne];
     return db.query(q, params);
 };
+
+exports.getReqestsWannabes = (userId) => {
+    const q = `
+        SELECT
+            users.id, firstname, lastname, accepted
+        FROM user_requests
+        JOIN users
+            ON (sender_id=users.id AND receiver_id=$1 AND accepted='false')
+            OR (sender_id=users.id AND receiver_id=$1 AND accepted='true')
+            OR (sender_id=$1 AND receiver_id=users.id AND accepted='true');
+        `;
+    const params = [userId];
+    return db.query(q, params);
+};

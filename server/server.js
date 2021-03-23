@@ -383,14 +383,20 @@ app.post("/api/requests/friends/:action/:userIdOther", async (req, res) => {
             break;
 
         case ACTION_UNFRIEND:
-            await db.deleteFriendRequest(userId, userIdOther);
+            await db.requestCancel(userId, userIdOther);
             res.json({ newStatus: STATUS_NO_REQUEST });
             break;
         default:
             res.status(400).json({ error: "Action not recognized." });
     }
 });
-// request part -------------------------------------------------------------------->
+// request part <--------------------------------------------------------------------
+
+app.get("/api/wannabes", async (req, res) => {
+    const userID = req.session.userId;
+    const result = await db.getReqestsWannabes(userID);
+    res.json(result.rows);
+});
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

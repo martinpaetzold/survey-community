@@ -1,11 +1,13 @@
 import { Component } from "react";
-import axios from "./axios";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "./axios.js";
 import ProfilePicture from "./ProfilePicture.js";
 import Uploader from "./Uploader.js";
 import Profile from "./Profile.js";
 import OtherProfile from "./OtherProfile.js";
 import ProfileSearch from "./ProfileSearch.js";
-import { BrowserRouter, Route } from "react-router-dom";
+import Friends from "./Friends.js";
 
 export default class App extends Component {
     constructor() {
@@ -65,6 +67,13 @@ export default class App extends Component {
                 <>
                     <h1>Hello, {this.state.first}!</h1>
                     <h2>Nice to see you again.</h2>
+                    <div className="Navigation">
+                        <Link to={"/"}>Home</Link>
+                        <br />
+                        <Link to={"/friends"}>Friends</Link>
+                        <br />
+                        <Link to={"/users"}>Search</Link>
+                    </div>
                     <div className="profile-corner">
                         <ProfilePicture
                             id={this.state.id}
@@ -110,6 +119,17 @@ export default class App extends Component {
                                 toggleUploader={() => this.toggleUploader()}
                                 bio={this.state.bio}
                                 setBio={(e) => this.setBio(e)}
+                            />
+                        )}
+                    />
+
+                    <Route
+                        path="/friends"
+                        render={(props) => (
+                            <Friends
+                                match={props.match}
+                                key={props.match.url}
+                                history={props.history}
                             />
                         )}
                     />
