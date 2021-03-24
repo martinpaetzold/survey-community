@@ -39,31 +39,46 @@ export default function ButtonRequestFriend(props) {
 
     if (status == STATUS_NO_REQUEST) {
         return (
-            <button onClick={(e) => sendAction(ACTION_MAKE_REQUEST)}>
+            <button
+                className="button-friend-request"
+                onClick={(e) => sendAction(ACTION_MAKE_REQUEST)}
+            >
                 Make request
             </button>
         );
     } else if (status == STATUS_ACCEPTED) {
         return (
-            <button onClick={(e) => sendAction(ACTION_UNFRIEND)}>
+            <button
+                className="button-friend-request"
+                onClick={(e) => sendAction(ACTION_UNFRIEND)}
+            >
                 Unfriend
             </button>
         );
     } else if (status == STATUS_REQUEST_MADE_BY_YOU) {
         return (
-            <button onClick={(e) => sendAction(ACTION_CANCEL_REQUEST)}>
+            <button
+                className="button-friend-request"
+                onClick={(e) => sendAction(ACTION_CANCEL_REQUEST)}
+            >
                 Cancel request
             </button>
         );
     } else if (status == STATUS_REQUEST_MADE_TO_YOU) {
         return (
-            <button onClick={(e) => sendAction(ACTION_ACCEPT_REQUEST)}>
+            <button
+                className="button-friend-request"
+                onClick={(e) => sendAction(ACTION_ACCEPT_REQUEST)}
+            >
                 Accept
             </button>
         );
     } else {
         return (
-            <button onClick={(e) => sendAction(ACTION_MAKE_REQUEST)}>
+            <button
+                className="button-friend-request"
+                onClick={(e) => sendAction(ACTION_MAKE_REQUEST)}
+            >
                 Status loading..
             </button>
         );

@@ -31,10 +31,12 @@ export default function FriendsAndWantFriends(props) {
                 wantFriends.map((wantFriend) => {
                     return (
                         <div key={wantFriend.id} className="wantFriend">
-                            <Link to={"/user/" + wantFriend.id}></Link>
-                            <img src={wantFriend.profile_pic_url} />
-                            {wantFriend.firstname} {wantFriend.lastname}
+                            <Link to={"/user/" + wantFriend.id}>
+                                <img src={wantFriend.profile_pic_url} />
+                                {wantFriend.firstname} {wantFriend.lastname}
+                            </Link>
                             <button
+                                className="button-friend-accept"
                                 onClick={(e) =>
                                     dispatch(acceptFriend(wantFriend.id))
                                 }
@@ -57,6 +59,7 @@ export default function FriendsAndWantFriends(props) {
                                 {friend.lastname}
                             </Link>
                             <button
+                                className="button-friend-accept"
                                 onClick={(e) => dispatch(unFriend(friend.id))}
                             >
                                 Unfriend

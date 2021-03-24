@@ -64,6 +64,10 @@ h2 {
     padding-left: 20px;
 }
 
+h2 {
+    padding-top: -20px;
+}
+
 .profile-corner {
     position: fixed;
     right: 20px;
@@ -77,6 +81,7 @@ h2 {
     height: 100%;
     object-fit: cover;
     cursor: pointer;
+    margin-top: 0px;
 }
 
 .uploader {
@@ -171,10 +176,12 @@ h2 {
 .navigation {
     display: inline;
     margin-left: 20px;
+    margin-bottom: 40px;
 }
 
 .navigation a {
-    padding-right: 10px;
+    padding-right: 25px;
+    font-size: 30px;
 }
 
 .wantFriend {
@@ -183,4 +190,29 @@ h2 {
 
 .friend {
     margin-left: 20px;
+}
+
+.profile-img {
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.button-friend-request {
+    margin: 20px;
+}
+
+.button-friend-accept {
+    margin-left: 0px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: navy;
+}
+
+a:visited {
+    color: navy;
 }
