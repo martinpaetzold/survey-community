@@ -54,7 +54,6 @@ export default class OtherProfile extends Component {
                         />
                     )}
                 </div>
-                <h2>This is another profile.</h2>
                 <h1>
                     My name is {this.state.first} {this.state.last}
                 </h1>

@@ -142,6 +142,8 @@ h2 {
     width: 60px;
     height: 60px;
     object-fit: cover;
+    border-radius: 600px;
+    transform: translateY(20px);
 }
 
 .profile-search-results-wrap p {
@@ -215,4 +217,13 @@ a {
 
 a:visited {
     color: navy;
+}
+
+.profile-img-chat {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 300px;
+    margin-right: 10px;
+    transform: translateY(6px);
 }

@@ -192,12 +192,14 @@ exports.getReqestsWannabes = (userId) => {
 
 exports.getMostRecentChatmessages = () => {
     const q = `
-        SELECT user_chat_messages.id, firstname, lastname, user_id, user_chat_messages.message_text, user_chat_messages.create_at
-        FROM user_chat_messages
-        JOIN users
-        ON user_chat_messages.user_id = users.id
-        ORDER BY user_chat_messages.create_at ASC
-        LIMIT 10;
+        SELECT user_chat_messages.id, firstname, lastname, user_profiles.profile_picture_url, user_chat_messages.user_id,
+        user_chat_messages.message_text, user_chat_messages.create_at
+            FROM user_chat_messages
+            JOIN users
+            ON user_chat_messages.user_id = users.id
+            INNER JOIN user_profiles ON users.id=user_profiles.user_id
+            ORDER BY user_chat_messages.create_at ASC
+            LIMIT 10;
         `;
     return db.query(q);
 };

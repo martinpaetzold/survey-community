@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { socket } from "./start.js";
 
 export default function Chat() {
@@ -46,9 +47,14 @@ export default function Chat() {
 function Message(props) {
     return (
         <div className="message">
-            <span>
-                {props.firstname} {props.lastname}
-            </span>
+            <Link to={"/user/" + props.user_id} target="_blank">
+                <img
+                    className="profile-img-chat"
+                    src={props.profile_picture_url}
+                    alt={`${props.firstname} ${props.lastname}`}
+                />
+            </Link>
+            <span>{props.firstname}</span>
             <strong> {props.message_text}</strong>
         </div>
     );
