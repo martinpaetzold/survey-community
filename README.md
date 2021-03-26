@@ -1,3 +1,3 @@
 # Survey Community
 
-README.md for the project
+This is my survey community project. Need to add some awesome description later.

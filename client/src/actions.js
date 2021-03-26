@@ -50,3 +50,23 @@ export const chatMessage = async (message) => {
         messages: message,
     };
 };
+
+export async function getPrivateMessages(id) {
+    const { data } = await axios.get(`/api/user/messages/${id}`);
+    return {
+        type: "GET_PRIVATE_MESSAGES",
+        privateMessages: data.success,
+    };
+}
+
+export async function sendPrivateMessage(message, id) {
+    const { data } = await axios.post("/api/user/message", {
+        message_text: message,
+        otherId: id,
+    });
+    console.log("DATA: ", data);
+    return {
+        type: "SEND_PRIVATE_MESSAGE",
+        sentPrivateMessage: data.success,
+    };
+}

@@ -9,6 +9,7 @@ import OtherProfile from "./OtherProfile.js";
 import ProfileSearch from "./ProfileSearch.js";
 import Friends from "./Friends.js";
 import Chat from "./Chat.js";
+import Messages from "./Messages.js";
 
 export default class App extends Component {
     constructor() {
@@ -135,6 +136,19 @@ export default class App extends Component {
                     />
 
                     <Route path={"/chat"} exact component={Chat} />
+
+                    <Route
+                        path="/messages"
+                        render={() => <Messages />}
+                        path="/messages/:id"
+                        render={(props) => (
+                            <Messages
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
 
                     {this.state.uploaderIsVisible && (
                         <Uploader

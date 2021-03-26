@@ -207,6 +207,8 @@ h2 {
     margin-left: 0px;
     margin-bottom: 40px;
     margin-top: 10px;
+    display: inline;
+    margin-left: 20px;
 }
 
 a {
@@ -226,4 +228,51 @@ a:visited {
     border-radius: 300px;
     margin-right: 10px;
     transform: translateY(6px);
+}
+
+/* private msg part ----->  */
+.button-private-message {
+    display: inline;
+    margin-left: 20px;
+}
+
+.private-message-wrapper {
+    margin-left: 20px;
+    width: 80%;
+}
+
+.private-message-container {
+    list-style-type: none;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    padding-left: 0px;
+}
+
+.private-message-full {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.profile-img-pm {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 300px;
+    margin-right: 10px;
+    transform: translateY(6px);
+}
+
+.chat-textarea {
+    background-color: #fff;
+    margin-left: 20px;
+    margin-bottom: 22px;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    padding-left: 5px;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    width: 80%;
 }

@@ -213,3 +213,36 @@ exports.addNewChatmessage = (userId, message) => {
     const params = [userId, message];
     return db.query(q, params);
 };
+
+exports.getPrivateChat = (userId, otherId) => {
+    return db.query(
+        `SELECT users.id AS user, firstname, lastname, user_private_messages.message_text,
+        user_private_messages.created_at, user_private_messages.id FROM user_private_messages
+        LEFT JOIN users ON user_private_messages.sender_id = users.id
+        WHERE (user_private_messages.sender_id = $1 AND user_private_messages.receiver_id = $2)
+        OR (user_private_messages.sender_id = $2 AND user_private_messages.receiver_id = $1)
+        ORDER BY user_private_messages.id DESC LIMIT 50;`,
+        [userId, otherId]
+    );
+};
+
+exports.addPrivateMessage = (sender, receiver, msg) => {
+    const q = `
+        INSERT INTO user_private_messages (sender_id, receiver_id, message_text)
+        VALUES ($1, $2, $3)
+        RETURNING id;`;
+    const params = [sender, receiver, msg];
+    return db.query(q, params);
+};
+
+exports.getNewPrivateMessage = (messageId) => {
+    return db.query(
+        `SELECT users.id AS user, firstname, lastname,
+        user_private_messages.message_text, user_private_messages.created_at,
+        user_private_messages.id FROM user_private_messages
+        LEFT JOIN users ON user_private_messages.sender_id = users.id
+        WHERE user_private_messages.id = $1;
+        `,
+        [messageId]
+    );
+};

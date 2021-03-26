@@ -55,8 +55,7 @@ export default function FriendsAndWantFriends(props) {
                         <div key={friend.firstname} className="friend">
                             <Link to={"/user/" + friend.id}>
                                 <img src={friend.profile_pic_url} />
-                                {friend.firstname}
-                                {friend.lastname}
+                                {friend.firstname} {friend.lastname}
                             </Link>
                             <button
                                 className="button-friend-accept"
@@ -64,6 +63,11 @@ export default function FriendsAndWantFriends(props) {
                             >
                                 Unfriend
                             </button>
+                            <Link to={`/messages/${friend.id}`}>
+                                <button className="button-private-message">
+                                    Send {friend.firstname} a message.
+                                </button>
+                            </Link>
                         </div>
                     );
                 })}

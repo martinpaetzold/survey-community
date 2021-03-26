@@ -441,6 +441,50 @@ app.get("/api/wannabes", async (req, res) => {
     res.json(result.rows);
 });
 
+// private msg part ---------------------------------------------------------------->
+app.get("/api/user/messages/:id", (req, res) => {
+    const userId = req.session.userId;
+    //console.log(userId);
+    const { id } = req.params;
+    //console.log(id);
+    db.getPrivateChat(userId, id)
+        .then(({ rows }) => {
+            for (let i in rows) {
+                rows[i].time = rows[i].created_at.toLocaleString();
+            }
+            const result = {
+                success: rows.sort((a, b) => {
+                    return a.id - b.id;
+                }),
+            };
+            res.json(result);
+        })
+        .catch((err) => {
+            console.log("private messages error: ", err);
+            res.json({ error: true });
+        });
+});
+
+app.post("/api/user/message", (req, res) => {
+    const userId = req.session.userId;
+    const { otherId, message_text } = req.body;
+    db.addPrivateMessage(userId, otherId, message_text)
+        .then(({ rows }) => {
+            db.getNewPrivateMessage(rows[0].id)
+                .then(({ rows }) => {
+                    const newMessage = rows[0];
+                    newMessage.time = newMessage.created_at.toLocaleString();
+                    res.json({ success: newMessage });
+                })
+                .catch((err) => console.log("Get new message error: ", err));
+        })
+        .catch((err) => {
+            console.log("Send private message error: ", err);
+            res.json({ error: true });
+        });
+});
+// private msg part <----------------------------------------------------------------
+
 app.get("*", function (req, res) {
     if (!req.session.userId) {
         res.redirect("/welcome");
