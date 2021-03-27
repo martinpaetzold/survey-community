@@ -27,7 +27,7 @@ export const Json = {
                 },
                 {
                     type: "rating",
-                    name: "question4",
+                    name: "question2",
                     isRequired: true,
                     title: "Please rate this social community",
                     rateMax: 10,

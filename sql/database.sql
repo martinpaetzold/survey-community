@@ -82,4 +82,52 @@ CREATE TABLE user_private_messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- PART Surveys / survey details
+DROP TABLE IF EXISTS surveys;
+
+CREATE TABLE surveys (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL CHECK (title != ''),
+    description VARCHAR(255) NOT NULL CHECK (title != ''),
+    picture_url VARCHAR(255) NOT NULL CHECK (title != ''),
+    number_questions INT NOT NULL,
+    user_id INT REFERENCES users(id) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- PART Surveys / questions
+DROP TABLE IF EXISTS survey_questions;
+
+CREATE TABLE survey_questions (
+    id SERIAL PRIMARY KEY,
+    survey_id INT REFERENCES surveys(id) NOT NULL,
+    type VARCHAR(255) NOT NULL CHECK (type != ''),
+    answer_number VARCHAR(255) NOT NULL CHECK (answer_number != ''),
+    question_picture_url VARCHAR(255) NOT NULL CHECK (question_picture_url != ''),
+    title VARCHAR(255) NOT NULL CHECK (title != ''),
+    isReq VARCHAR(255) NOT NULL CHECK (isReq != ''),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- PART Surveys / answers
+DROP TABLE IF EXISTS survey_answers;
+
+CREATE TABLE survey_answers (
+    id SERIAL PRIMARY KEY,
+    survey_id INT REFERENCES surveys(id) NOT NULL,
+    question_id INT REFERENCES survey_questions(id) NOT NULL,
+    answer VARCHAR(255) NOT NULL CHECK (answer != ''),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- PART Surveys / user answers
+DROP TABLE IF EXISTS survey_user_anwers;
+
+CREATE TABLE survey_user_anwers (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) NOT NULL,
+    survey_id INT REFERENCES surveys(id) NOT NULL,
+    answer_values VARCHAR(255) NOT NULL CHECK (answer_value != ''),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
