@@ -10,6 +10,7 @@ import ProfileSearch from "./ProfileSearch.js";
 import Friends from "./Friends.js";
 import Chat from "./Chat.js";
 import Messages from "./Messages.js";
+import MySurvey from "./components/surveyDisplays/survey_one.js";
 
 export default class App extends Component {
     constructor() {
@@ -72,6 +73,7 @@ export default class App extends Component {
                     <div className="navigation">
                         <Link to={"/"}>My Profile</Link>
                         <Link to={"/friends"}>Friends</Link>
+                        <Link to={"/survey"}>Survey</Link>
                         <Link to={"/chat"}>Chat</Link>
                         <Link to={"/users"}>Search</Link>
                     </div>
@@ -137,9 +139,9 @@ export default class App extends Component {
 
                     <Route path={"/chat"} exact component={Chat} />
 
+                    <Route path={"/survey"} exact component={MySurvey} />
+
                     <Route
-                        path="/messages"
-                        render={() => <Messages />}
                         path="/messages/:id"
                         render={(props) => (
                             <Messages

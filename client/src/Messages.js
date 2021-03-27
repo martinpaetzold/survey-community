@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
-import ProfilePic from "./ProfilePicture.js";
 import { getPrivateMessages, sendPrivateMessage } from "./actions.js";
 
 export default function Messages(props) {
@@ -31,7 +29,7 @@ export default function Messages(props) {
     };
 
     if (!chatMessages) {
-        return <p>Loading</p>;
+        return <p>Loading..</p>;
     }
 
     return (
