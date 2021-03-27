@@ -1,6 +1,10 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "./axios.js";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Login extends Component {
     constructor() {
@@ -48,44 +52,42 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="registerField">
-                <h2>Login</h2>
-                {this.state.error && (
-                    <p className="errorMessage">
-                        Something went wrong. Please try again.
-                    </p>
-                )}
-                <div className="formField">
-                    <label>
-                        Email
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="email"
-                            placeholder="Email"
-                            type="text"
-                        />
-                    </label>
-                    <label>
-                        Password
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="password"
-                            placeholder="Password"
-                            type="password"
-                        />
-                    </label>
-                    <button onClick={(e) => this.handleClick(e)}>
-                        Login now
-                    </button>
-                    <p>
-                        Don't have an account yet?{" "}
-                        <Link to="/">Click here to Register.</Link>
-                    </p>
-                    <p>
-                        Forgotten your password?{" "}
-                        <Link to="/reset-password">Click here to Reset.</Link>
-                    </p>
-                </div>
+            <div className="Login">
+                <Form>
+                    <Col lg={3} className="Login-Col">
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                autoFocus
+                                name="email"
+                                placeholder="Email"
+                                type="text"
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                name="password"
+                                placeholder="Password"
+                                type="password"
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </Form.Group>
+                        <Button block onClick={(e) => this.handleClick(e)}>
+                            Login
+                        </Button>
+                        <p>
+                            Don&rsquo;t have an account yet?{" "}
+                            <Link to="/">Click here to Register.</Link>
+                            <br />
+                            Forgotten your password?{" "}
+                            <Link to="/reset-password">
+                                Click here to Reset.
+                            </Link>
+                        </p>
+                    </Col>
+                </Form>
             </div>
         );
     }

@@ -1,6 +1,8 @@
 import { Component } from "react";
 import App from "./App";
 import axios from "./axios.js";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Uploader extends Component {
     constructor(props) {
@@ -73,9 +75,9 @@ export default class Uploader extends Component {
                         type="file"
                         accept="image/*"
                     />
-                    <button onClick={(e) => this.handleUpload(e)}>
+                    <Button onClick={(e) => this.handleUpload(e)}>
                         Upload
-                    </button>
+                    </Button>
                 </div>
             </div>
         );

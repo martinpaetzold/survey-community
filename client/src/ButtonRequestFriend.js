@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "./axios.js";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const STATUS_NO_REQUEST = "no-request";
 const STATUS_REQUEST_MADE_BY_YOU = "request-made-by-you";
@@ -39,48 +41,48 @@ export default function ButtonRequestFriend(props) {
 
     if (status == STATUS_NO_REQUEST) {
         return (
-            <button
+            <Button
                 className="button-friend-request"
                 onClick={(e) => sendAction(ACTION_MAKE_REQUEST)}
             >
                 Make request
-            </button>
+            </Button>
         );
     } else if (status == STATUS_ACCEPTED) {
         return (
-            <button
+            <Button
                 className="button-friend-request"
                 onClick={(e) => sendAction(ACTION_UNFRIEND)}
             >
                 Unfriend
-            </button>
+            </Button>
         );
     } else if (status == STATUS_REQUEST_MADE_BY_YOU) {
         return (
-            <button
+            <Button
                 className="button-friend-request"
                 onClick={(e) => sendAction(ACTION_CANCEL_REQUEST)}
             >
                 Cancel request
-            </button>
+            </Button>
         );
     } else if (status == STATUS_REQUEST_MADE_TO_YOU) {
         return (
-            <button
+            <Button
                 className="button-friend-request"
                 onClick={(e) => sendAction(ACTION_ACCEPT_REQUEST)}
             >
                 Accept
-            </button>
+            </Button>
         );
     } else {
         return (
-            <button
+            <Button
                 className="button-friend-request"
                 onClick={(e) => sendAction(ACTION_MAKE_REQUEST)}
             >
                 Status loading..
-            </button>
+            </Button>
         );
     }
 }

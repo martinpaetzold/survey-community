@@ -1,6 +1,8 @@
 import { Component } from "react";
-import axios from "./axios.js";
 import { Link } from "react-router-dom";
+import axios from "./axios.js";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class ResetPassword extends Component {
     constructor() {
@@ -120,9 +122,9 @@ export default class ResetPassword extends Component {
                                 type="password"
                             />
                         </label>
-                        <button onClick={(e) => this.resetPassword(e)}>
+                        <Button onClick={(e) => this.resetPassword(e)}>
                             Submit
-                        </button>
+                        </Button>
                     </div>
                 </div>
             );
@@ -145,9 +147,9 @@ export default class ResetPassword extends Component {
                                 type="text"
                             />
                         </label>
-                        <button onClick={(e) => this.sendCode(e)}>
+                        <Button onClick={(e) => this.sendCode(e)}>
                             Submit
-                        </button>
+                        </Button>
                     </div>
                 </div>
             );

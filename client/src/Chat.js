@@ -1,3 +1,5 @@
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -33,12 +35,12 @@ export default function Chat() {
                     placeholder="Type your message.."
                     className="message-input"
                 />
-                <button
+                <Button
                     onClick={(e) => handleButtonOnClick()}
                     className="message-button-send"
                 >
                     Send
-                </button>
+                </Button>
             </div>
         </div>
     );

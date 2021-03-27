@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "./axios.js";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Registration extends Component {
     constructor() {
@@ -92,9 +94,9 @@ export default class Registration extends Component {
                             type="password"
                         />
                     </label>
-                    <button onClick={(e) => this.handleClick(e)}>
+                    <Button onClick={(e) => this.handleClick(e)}>
                         Register now
-                    </button>
+                    </Button>
                     <p>
                         Already have an account?{" "}
                         <Link to="/login">Click here to Log in!</Link>

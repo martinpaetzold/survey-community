@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -35,14 +37,14 @@ export default function FriendsAndWantFriends(props) {
                                 <img src={wantFriend.profile_pic_url} />
                                 {wantFriend.firstname} {wantFriend.lastname}
                             </Link>
-                            <button
+                            <Button
                                 className="button-friend-accept"
                                 onClick={(e) =>
                                     dispatch(acceptFriend(wantFriend.id))
                                 }
                             >
                                 Accept Friend
-                            </button>
+                            </Button>
                         </div>
                     );
                 })}
@@ -57,16 +59,16 @@ export default function FriendsAndWantFriends(props) {
                                 <img src={friend.profile_pic_url} />
                                 {friend.firstname} {friend.lastname}
                             </Link>
-                            <button
+                            <Button
                                 className="button-friend-accept"
                                 onClick={(e) => dispatch(unFriend(friend.id))}
                             >
                                 Unfriend
-                            </button>
+                            </Button>
                             <Link to={`/messages/${friend.id}`}>
-                                <button className="button-private-message">
+                                <Button className="button-private-message">
                                     Send {friend.firstname} a message.
-                                </button>
+                                </Button>
                             </Link>
                         </div>
                     );

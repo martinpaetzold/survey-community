@@ -11,6 +11,7 @@ import Friends from "./Friends.js";
 import Chat from "./Chat.js";
 import Messages from "./Messages.js";
 import MySurvey from "./components/surveyDisplays/survey_one.js";
+import Navbar from "./components/Navbar.js";
 
 export default class App extends Component {
     constructor() {
@@ -68,23 +69,17 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <>
-                    <h1>Hello, {this.state.first}!</h1>
-                    <h2>Nice to see you again.</h2>
-                    <div className="navigation">
-                        <Link to={"/"}>My Profile</Link>
-                        <Link to={"/friends"}>Friends</Link>
-                        <Link to={"/survey"}>Survey</Link>
-                        <Link to={"/chat"}>Chat</Link>
-                        <Link to={"/users"}>Search</Link>
-                    </div>
-                    <div className="profile-corner">
-                        <ProfilePicture
-                            id={this.state.id}
-                            first={this.state.first}
-                            last={this.state.last}
-                            profilePic={this.state.profilePic}
-                            toggleUploader={() => this.toggleUploader()}
-                        />
+                    <Navbar first={this.state.first} />
+                    <div className="header">
+                        <div className="profile-corner">
+                            <ProfilePicture
+                                id={this.state.id}
+                                first={this.state.first}
+                                last={this.state.last}
+                                profilePic={this.state.profilePic}
+                                toggleUploader={() => this.toggleUploader()}
+                            />
+                        </div>
                     </div>
 
                     <Route

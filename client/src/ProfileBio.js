@@ -1,4 +1,6 @@
 import { Component } from "react";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "./axios.js";
 
 export default class BioEditor extends Component {
@@ -77,19 +79,19 @@ export default class BioEditor extends Component {
                 )}
 
                 {this.props.bio && !this.state.textareaVisible && (
-                    <button onClick={() => this.toggleTextarea()}>
+                    <Button onClick={() => this.toggleTextarea()}>
                         Edit bio
-                    </button>
+                    </Button>
                 )}
 
                 {this.state.textareaVisible && (
-                    <button onClick={(e) => this.submitBio(e)}>Save</button>
+                    <Button onClick={(e) => this.submitBio(e)}>Save</Button>
                 )}
 
                 {this.state.textareaVisible && (
-                    <button onClick={() => this.toggleTextarea()}>
+                    <Button onClick={() => this.toggleTextarea()}>
                         Cancel
-                    </button>
+                    </Button>
                 )}
             </div>
         );
