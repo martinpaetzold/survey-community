@@ -70,3 +70,12 @@ export async function sendPrivateMessage(message, id) {
         sentPrivateMessage: data.success,
     };
 }
+
+export async function sendSurveyUserAnswers(userId, survey_id, answer_values) {
+    const { data } = await axios.post("/api/surveys/user/add/anwer", {
+        userId: userId,
+        survey_id: survey_id,
+        answer_values: answer_values,
+    });
+    console.log("DATA: ", data);
+}

@@ -84,15 +84,15 @@ io.on("connection", async (socket) => {
     }
     console.log("Socket id now connected: ", socket.id);
     const userId = socket.request.session.userId;
-    console.log("UID: ", userId);
+    //console.log("UID: ", userId);
 
     const lastMessages = await db.getMostRecentChatmessages();
-    console.log("lastMessages ", lastMessages.rows);
+    //console.log("lastMessages ", lastMessages.rows);
     socket.emit("chatMessages", lastMessages.rows);
 
     // React on messages
     socket.on("newMessage", async (message_text) => {
-        console.log(message_text);
+        //console.log(message_text);
         // Save to databse
         const result = await db.addNewChatmessage(userId, message_text);
         const message_id = result.rows[0].id;
@@ -484,6 +484,32 @@ app.post("/api/user/message", (req, res) => {
         });
 });
 // private msg part <----------------------------------------------------------------
+
+// add UserAnswers part ------------------------------------------------------------>
+
+app.post("/api/surveys/user/add/anwer", (req, res) => {
+    const userId = req.session.userId;
+    console.log("survey UID ", userId);
+    let survey_id = 2;
+    console.log("survey id", survey_id);
+    console.log(req.body);
+    const answer_values = req.body.answer_values;
+    console.log("answer_values", answer_values);
+
+    //get shit done.
+    console.log("POST /api/surveys/user/add/anwer", req.body);
+    db.addSurveyUserAnwers(userId, survey_id, answer_values)
+        .then(() => {
+            res.json({
+                success: true,
+            });
+        })
+        .catch((error) => {
+            console.log("error POST anwersUser ", error);
+            res.json({ error: true });
+        });
+});
+// add UserAnswers part <------------------------------------------------------------
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {

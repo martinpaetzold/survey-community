@@ -10,7 +10,7 @@ export default function Chat() {
     const [draft, setDraft] = useState("");
     const messages = useSelector((state) => state.messages);
 
-    console.log("messages: ", messages);
+    //console.log("messages: ", messages);
 
     const handleButtonOnClick = () => {
         socket.emit("newMessage", draft);

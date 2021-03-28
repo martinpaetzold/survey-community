@@ -95,6 +95,9 @@ CREATE TABLE surveys (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO surveys (title, description, picture_url, number_questions, user_id) 
+VALUES ('Survey First Try', 'Awesome! This is the first survey with SurveyJS.', 'test.png', 4, 10);
+
 -- PART Surveys / questions
 DROP TABLE IF EXISTS survey_questions;
 
@@ -127,7 +130,9 @@ CREATE TABLE survey_user_anwers (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) NOT NULL,
     survey_id INT REFERENCES surveys(id) NOT NULL,
-    answer_values VARCHAR(255) NOT NULL CHECK (answer_value != ''),
+    answer_values VARCHAR(255) NOT NULL CHECK (answer_values != ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO survey_user_anwers (user_id, survey_id, answer_values) 
+VALUES (10, 2, '{"question1":["item1","item3"],"question2":6}');
