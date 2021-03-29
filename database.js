@@ -250,8 +250,35 @@ exports.getNewPrivateMessage = (messageId) => {
 exports.addSurveyUserAnwers = (user_id, survey_id, answer_values) => {
     const q = `
         INSERT INTO survey_user_anwers (user_id, survey_id, answer_values) 
-        VALUES ($1, $2, $3);
+        VALUES (10, 1, {"question1":["item3"],"question2":7});
         `;
     const params = [user_id, survey_id, answer_values];
     return db.query(q, params);
+};
+
+exports.getSurveyAnwers = (surveyId) => {
+    return db.query(`SELECT * FROM survey_user_anwers WHERE survey_id=$1;`, [
+        surveyId,
+    ]);
+};
+
+exports.getSurveys = () => {
+    const q = `
+        SELECT * FROM surveys;
+        `;
+    return db.query(q);
+};
+
+exports.getSurveyQuestions = () => {
+    const q = `
+        SELECT * FROM survey_questions;
+        `;
+    return db.query(q);
+};
+
+exports.getSurveyQuestionAnswers = () => {
+    const q = `
+        SELECT * FROM survey_answers;
+        `;
+    return db.query(q);
 };

@@ -13,7 +13,7 @@ function sendDataToServer(survey, options) {
     let answer = JSON.stringify(survey.data);
     sendSurveyUserAnswers(10, 2, answer);
 
-    options.showDataSaving();
+    //options.showDataSaving();
 
     /*
     if (status == "success") {

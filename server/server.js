@@ -485,9 +485,75 @@ app.post("/api/user/message", (req, res) => {
 });
 // private msg part <----------------------------------------------------------------
 
-// add UserAnswers part ------------------------------------------------------------>
+// survey part ------------------------------------------------------------>
+app.get("/api/surveys/overview", (req, res) => {
+    console.log(req);
+    db.getSurveys()
+        .then(({ rows }) => {
+            console.log(rows);
+            res.json({
+                success: true,
+                surveys: rows,
+            });
+        })
+        .catch((error) => {
+            console.log("error GET surveys ", error);
+            res.json({ error: true });
+        });
+});
 
-app.post("/api/surveys/user/add/anwer", (req, res) => {
+app.get("/api/surveys/content/:id", (req, res) => {
+    const userId = req.session.userId;
+    console.log("/api/surveys/ UID:", userId);
+    const { id } = req.params;
+    console.log("/api/surveys/ id:", id);
+    db.getSurveyAnwers(id)
+        .then(({ rows }) => {
+            console.log(rows);
+            res.json({
+                success: true,
+                userAnswers: rows,
+            });
+        })
+        .catch((error) => {
+            console.log("error survey GET answers:", error);
+            res.json({ error: true });
+        });
+});
+
+app.get("/api/surveys/questions", (req, res) => {
+    console.log(req);
+    db.getSurveyQuestions()
+        .then(({ rows }) => {
+            console.log(rows);
+            res.json({
+                success: true,
+                questions: rows,
+            });
+        })
+        .catch((error) => {
+            console.log("error GET survey questions ", error);
+            res.json({ error: true });
+        });
+});
+
+app.get("/api/surveys/questions/answers", (req, res) => {
+    console.log(req);
+    db.getSurveyQuestionAnswers()
+        .then(({ rows }) => {
+            console.log(rows);
+            res.json({
+                success: true,
+                answers: rows,
+            });
+        })
+        .catch((error) => {
+            console.log("error GET survey question/anwers ", error);
+            res.json({ error: true });
+        });
+});
+
+app.post("/api/surveys/user/add/answer", (req, res) => {
     const userId = req.session.userId;
     console.log("survey UID ", userId);
     let survey_id = 2;
@@ -509,7 +575,7 @@ app.post("/api/surveys/user/add/anwer", (req, res) => {
             res.json({ error: true });
         });
 });
-// add UserAnswers part <------------------------------------------------------------
+// survey part <------------------------------------------------------------
 
 app.get("*", function (req, res) {
     if (!req.session.userId) {
