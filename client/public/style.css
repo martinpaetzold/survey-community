@@ -24,7 +24,6 @@ body {
 .formField {
     background-color: lightgray;
     padding: 50px 100px;
-    border-top: 10px solid navy;
 }
 
 label,
@@ -215,11 +214,9 @@ h2 {
 a {
     text-decoration: none;
     cursor: pointer;
-    color: navy;
 }
 
 a:visited {
-    color: navy;
 }
 
 .profile-img-chat {
@@ -282,4 +279,52 @@ a:visited {
 
 .Login {
     margin-top: 60px;
+}
+
+.navbar a {
+    color: #fff;
+}
+
+.dropdown-menu a {
+    color: navy;
+}
+
+.user-other span {
+    display: block;
+    font-size: 18px;
+}
+
+.user-other {
+    font-size: 12px;
+}
+
+.welcome-site {
+    background: url("background_image_default.jpg") center center/cover
+        no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+.container {
+    background-color: lightgray;
+}
+
+.profilePictureNavbar {
+    object-fit: cover;
+    border-radius: 200px;
+}
+
+.main-container {
+    position: absolute;
+    top: 100px;
+    width: 100vw;
+}
+
+.card-text {
+    padding: 0px;
+}
+
+.card-deck {
+    margin-bottom: 40px;
 }

@@ -51,7 +51,6 @@ export default class Registration extends Component {
     render() {
         return (
             <div className="registerField">
-                <h2>Registration</h2>
                 {this.state.error && (
                     <p className="errorMessage">
                         Something went wrong. Please try again.
@@ -99,7 +98,7 @@ export default class Registration extends Component {
                     </Button>
                     <p>
                         Already have an account?{" "}
-                        <Link to="/login">Click here to Log in!</Link>
+                        <Link to="/">Click here to Log in!</Link>
                     </p>
                 </div>
             </div>

@@ -250,7 +250,7 @@ exports.getNewPrivateMessage = (messageId) => {
 exports.addSurveyUserAnwers = (user_id, survey_id, answer_values) => {
     const q = `
         INSERT INTO survey_user_anwers (user_id, survey_id, answer_values) 
-        VALUES (10, 1, {"question1":["item3"],"question2":7});
+        VALUES ($1, $2, $3);
         `;
     const params = [user_id, survey_id, answer_values];
     return db.query(q, params);

@@ -562,8 +562,7 @@ app.post("/api/surveys/user/add/answer", (req, res) => {
     const answer_values = req.body.answer_values;
     console.log("answer_values", answer_values);
 
-    //get shit done.
-    console.log("POST /api/surveys/user/add/anwer", req.body);
+    console.log("POST /api/surveys/user/add/answer", req.body);
     db.addSurveyUserAnwers(userId, survey_id, answer_values)
         .then(() => {
             res.json({
@@ -571,7 +570,7 @@ app.post("/api/surveys/user/add/answer", (req, res) => {
             });
         })
         .catch((error) => {
-            console.log("error POST anwersUser ", error);
+            console.log("error POST answersUser ", error);
             res.json({ error: true });
         });
 });

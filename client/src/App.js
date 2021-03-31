@@ -11,6 +11,7 @@ import Friends from "./Friends.js";
 import Chat from "./Chat.js";
 import Messages from "./Messages.js";
 import MySurvey from "./components/surveyDisplays/survey_one.js";
+import Dashboard from "./Dashboard.js";
 import Navbar from "./components/Navbar.js";
 
 export default class App extends Component {
@@ -69,83 +70,79 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <>
-                    <Navbar first={this.state.first} />
-                    <div className="header">
-                        <div className="profile-corner">
-                            <ProfilePicture
-                                id={this.state.id}
-                                first={this.state.first}
-                                last={this.state.last}
-                                profilePic={this.state.profilePic}
-                                toggleUploader={() => this.toggleUploader()}
-                            />
-                        </div>
+                    <Navbar
+                        first={this.state.first}
+                        profilePic={this.state.profilePic}
+                    />
+
+                    <div className="main-container">
+                        <Route
+                            exact
+                            path="/user/:id"
+                            render={(props) => (
+                                <OtherProfile
+                                    match={props.match}
+                                    key={props.match.url}
+                                    history={props.history}
+                                />
+                            )}
+                        />
+
+                        <Route
+                            path="/users"
+                            render={(props) => (
+                                <ProfileSearch
+                                    match={props.match}
+                                    key={props.match.url}
+                                    history={props.history}
+                                />
+                            )}
+                        />
+
+                        <Route path={"/"} exact component={Dashboard} />
+
+                        <Route
+                            exact
+                            path="/profile"
+                            render={() => (
+                                <Profile
+                                    id={this.state.id}
+                                    first={this.state.first}
+                                    last={this.state.last}
+                                    profilePic={this.state.profilePic}
+                                    toggleUploader={() => this.toggleUploader()}
+                                    bio={this.state.bio}
+                                    setBio={(e) => this.setBio(e)}
+                                />
+                            )}
+                        />
+
+                        <Route
+                            path="/friends"
+                            render={(props) => (
+                                <Friends
+                                    match={props.match}
+                                    key={props.match.url}
+                                    history={props.history}
+                                />
+                            )}
+                        />
+
+                        <Route path={"/chat"} exact component={Chat} />
+
+                        <Route path={"/survey"} exact component={MySurvey} />
+
+                        <Route
+                            path="/messages/:id"
+                            render={(props) => (
+                                <Messages
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
                     </div>
-
-                    <Route
-                        exact
-                        path="/user/:id"
-                        render={(props) => (
-                            <OtherProfile
-                                match={props.match}
-                                key={props.match.url}
-                                history={props.history}
-                            />
-                        )}
-                    />
-
-                    <Route
-                        path="/users"
-                        render={(props) => (
-                            <ProfileSearch
-                                match={props.match}
-                                key={props.match.url}
-                                history={props.history}
-                            />
-                        )}
-                    />
-
-                    <Route
-                        exact
-                        path="/"
-                        render={() => (
-                            <Profile
-                                id={this.state.id}
-                                first={this.state.first}
-                                last={this.state.last}
-                                profilePic={this.state.profilePic}
-                                toggleUploader={() => this.toggleUploader()}
-                                bio={this.state.bio}
-                                setBio={(e) => this.setBio(e)}
-                            />
-                        )}
-                    />
-
-                    <Route
-                        path="/friends"
-                        render={(props) => (
-                            <Friends
-                                match={props.match}
-                                key={props.match.url}
-                                history={props.history}
-                            />
-                        )}
-                    />
-
-                    <Route path={"/chat"} exact component={Chat} />
-
-                    <Route path={"/survey"} exact component={MySurvey} />
-
-                    <Route
-                        path="/messages/:id"
-                        render={(props) => (
-                            <Messages
-                                key={props.match.url}
-                                match={props.match}
-                                history={props.history}
-                            />
-                        )}
-                    />
 
                     {this.state.uploaderIsVisible && (
                         <Uploader

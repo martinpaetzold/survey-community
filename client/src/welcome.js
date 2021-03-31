@@ -3,29 +3,34 @@ import Registration from "./Registration.js";
 import Login from "./Login.js";
 import ResetPassword from "./ResetPassword.js";
 import Navbar from "./components/NavbarStart.js";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import Container from "react-bootstrap/Container";
-
+import { Container, Row, Col } from "react-bootstrap";
 import { HashRouter, Route } from "react-router-dom";
 
 export default function Welcome() {
     return (
-        <div>
-            <Container className="p-3">
-                <Navbar />
-                <Jumbotron>
-                    <h1 className="jumbo">Welcome to my social network</h1>
-                </Jumbotron>
-                <HashRouter>
-                    <div>
-                        <Route exact path="/" component={Registration} />
-                        <Route path="/login" component={Login} />
-                        <Route
-                            path="/reset-password"
-                            component={ResetPassword}
-                        />
-                    </div>
-                </HashRouter>
+        <div className="welcome-site">
+            <Navbar />
+            <Container className="welcome-image align-items-center">
+                <h1 className="jumbo">Welcome to my social network</h1>
+            </Container>
+            <Container>
+                <Row className="position-relative w-100 align-items-center">
+                    <Col>
+                        <HashRouter>
+                            <div>
+                                <Route exact path="/" component={Login} />
+                                <Route
+                                    path="/register"
+                                    component={Registration}
+                                />
+                                <Route
+                                    path="/reset-password"
+                                    component={ResetPassword}
+                                />
+                            </div>
+                        </HashRouter>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );

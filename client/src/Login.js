@@ -54,7 +54,7 @@ export default class Login extends Component {
         return (
             <div className="Login">
                 <Form>
-                    <Col lg={3} className="Login-Col">
+                    <Col lg={12} className="Login-Col">
                         <Form.Group>
                             <Form.Label>Email</Form.Label>
                             <Form.Control
@@ -63,6 +63,7 @@ export default class Login extends Component {
                                 placeholder="Email"
                                 type="text"
                                 onChange={(e) => this.handleChange(e)}
+                                block
                             />
                         </Form.Group>
                         <Form.Group>
@@ -72,14 +73,19 @@ export default class Login extends Component {
                                 placeholder="Password"
                                 type="password"
                                 onChange={(e) => this.handleChange(e)}
+                                block
                             />
                         </Form.Group>
-                        <Button block onClick={(e) => this.handleClick(e)}>
+                        <Button
+                            size="lg"
+                            block
+                            onClick={(e) => this.handleClick(e)}
+                        >
                             Login
                         </Button>
                         <p>
                             Don&rsquo;t have an account yet?{" "}
-                            <Link to="/">Click here to Register.</Link>
+                            <Link to="/register">Click here to Register.</Link>
                             <br />
                             Forgotten your password?{" "}
                             <Link to="/reset-password">
