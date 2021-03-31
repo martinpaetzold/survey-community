@@ -124,9 +124,9 @@ CREATE TABLE survey_answers (
 );
 
 -- PART Surveys / user answers
-DROP TABLE IF EXISTS survey_user_anwers;
+DROP TABLE IF EXISTS survey_user_answers;
 
-CREATE TABLE survey_user_anwers (
+CREATE TABLE survey_user_answers (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) NOT NULL,
     survey_id INT REFERENCES surveys(id) NOT NULL,
@@ -134,5 +134,5 @@ CREATE TABLE survey_user_anwers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO survey_user_anwers (user_id, survey_id, answer_values) 
+INSERT INTO survey_user_answers (user_id, survey_id, answer_values) 
 VALUES (10, 2, '{"question1":["item1","item3"],"question2":6}');
