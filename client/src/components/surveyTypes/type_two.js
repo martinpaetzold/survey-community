@@ -2,7 +2,7 @@ import React from "react";
 import "survey-react/survey.css";
 import * as Survey from "survey-react";
 import axios from "../../axios.js";
-import { Json } from "../surveys/questions_one.js";
+import { Json } from "../surveys/questions_two.js";
 import { sendSurveyUserAnswers } from "../../actions.js";
 
 Survey.StylesManager.applyTheme("bootstrap");
@@ -28,8 +28,8 @@ function sendDataToServer(survey, options) {
 }
 
 let Json2 = {
-    surveyId: "8450345c-1912-4e30-b293-7ef23f933287",
-    surveyPostId: "cf075257-923f-4458-9eb6-1e6a2d4e4484",
+    surveyId: "05c785ea-572c-451c-9434-2b5175f29dae",
+    surveyPostId: "9b9e968d-500e-4b8c-a107-9ebbb61edc45",
 };
 
 const MySurvey = (prop) => {

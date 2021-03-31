@@ -11,7 +11,9 @@ import Friends from "./Friends.js";
 import Chat from "./Chat.js";
 import Messages from "./Messages.js";
 import MySurvey from "./components/surveyDisplays/survey_one.js";
+import MySurvey2 from "./components/surveyDisplays/survey_two.js";
 import Dashboard from "./Dashboard.js";
+import SurveysOverview from "./components/SurveysOverview.js";
 import Navbar from "./components/Navbar.js";
 
 export default class App extends Component {
@@ -130,7 +132,19 @@ export default class App extends Component {
 
                         <Route path={"/chat"} exact component={Chat} />
 
-                        <Route path={"/survey"} exact component={MySurvey} />
+                        <Route
+                            path={"/surveys"}
+                            exact
+                            component={SurveysOverview}
+                        />
+
+                        <Route path={"/surveys/1"} exact component={MySurvey} />
+
+                        <Route
+                            path={"/surveys/2"}
+                            exact
+                            component={MySurvey2}
+                        />
 
                         <Route
                             path="/messages/:id"

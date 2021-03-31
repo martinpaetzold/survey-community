@@ -6,3 +6,18 @@
     background-color: navy;
     border-radius: 0px;
 }
+
+input,
+label {
+    margin: auto;
+    width: auto;
+    display: inline;
+}
+
+h4 {
+    padding-left: 20px;
+}
+
+.small span {
+    padding-left: 20px;
+}

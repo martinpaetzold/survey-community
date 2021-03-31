@@ -19,7 +19,7 @@ export default function NavbarNavigation({ first, profilePic }) {
                 />
             </Navbar.Brand>
             <Navbar.Collapse className="justify-content-end">
-                <Nav.Link href="/survey">Survey</Nav.Link>
+                <Nav.Link href="/surveys">Surveys</Nav.Link>
                 <Nav.Link href="/chat">Chat</Nav.Link>
                 <Nav.Link href="/users">Search</Nav.Link>
                 <NavDropdown title={title_menu} id="collasible-nav-dropdown">
