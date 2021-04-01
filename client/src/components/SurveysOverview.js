@@ -7,22 +7,20 @@ export default function SurveysOverview() {
             <Jumbotron>
                 <h1>We wan&#39;t your opinion.</h1>
                 <p>
-                    This is a simple hero unit, a simple jumbotron-style
-                    component for calling extra attention to featured content or
-                    information.
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                    magna aliquam erat volutpat.
                 </p>
             </Jumbotron>
             <CardDeck>
                 <Card style={{ width: "36rem" }} href="/surveys/1">
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_03.jpg" />
                     <Card.Body>
                         <Card.Title>Survey #1</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Ut wisi enim ad minim veniam, quis nostrud
+                            exercitation ulliam corper suscipit lobortis nisl ut
+                            aliquip ex ea commodo consequat.
                         </Card.Text>
                         <Button variant="primary" href="/surveys/1">
                             Start survey
@@ -30,15 +28,13 @@ export default function SurveysOverview() {
                     </Card.Body>
                 </Card>
                 <Card style={{ width: "36rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_05.jpg" />
                     <Card.Body>
                         <Card.Title>Survey #2</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Duis autem veleum iriure dolor in hendrerit in
+                            vulputate velit esse molestie consequat, vel willum
+                            lunombro dolore eu feugiat.
                         </Card.Text>
                         <Button variant="primary" href="/surveys/2">
                             Start survey

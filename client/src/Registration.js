@@ -1,7 +1,9 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "./axios.js";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default class Registration extends Component {
@@ -56,51 +58,64 @@ export default class Registration extends Component {
                         Something went wrong. Please try again.
                     </p>
                 )}
-                <div className="formField">
-                    <label>
-                        First Name
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="first"
-                            placeholder="First Name"
-                            type="text"
-                        />
-                    </label>
-                    <label>
-                        Last Name
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="last"
-                            placeholder="Last Name"
-                            type="text"
-                        />
-                    </label>
-                    <label>
-                        Email
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="email"
-                            placeholder="Email"
-                            type="text"
-                        />
-                    </label>
-                    <label>
-                        Password
-                        <input
-                            onChange={(e) => this.handleChange(e)}
-                            name="password"
-                            placeholder="Password"
-                            type="password"
-                        />
-                    </label>
-                    <Button onClick={(e) => this.handleClick(e)}>
-                        Register now
-                    </Button>
-                    <p>
-                        Already have an account?{" "}
-                        <Link to="/">Click here to Log in!</Link>
-                    </p>
-                </div>
+                <Form>
+                    <Col lg={12} className="registerField-Col">
+                        <Form.Group>
+                            <Form.Label>First name</Form.Label>
+                            <Form.Control
+                                autoFocus
+                                name="first"
+                                placeholder="First name"
+                                type="text"
+                                onChange={(e) => this.handleChange(e)}
+                                block
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Last name</Form.Label>
+                            <Form.Control
+                                autoFocus
+                                name="last"
+                                placeholder="Last name"
+                                type="text"
+                                onChange={(e) => this.handleChange(e)}
+                                block
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                autoFocus
+                                name="email"
+                                placeholder="Email"
+                                type="text"
+                                onChange={(e) => this.handleChange(e)}
+                                block
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                name="password"
+                                placeholder="Password"
+                                type="password"
+                                onChange={(e) => this.handleChange(e)}
+                                block
+                            />
+                        </Form.Group>
+                        <Button
+                            size="lg"
+                            block
+                            onClick={(e) => this.handleClick(e)}
+                        >
+                            Register now
+                        </Button>
+                        <p>
+                            Already have an account?{" "}
+                            <Link to="/">Click here to Log in!</Link>
+                        </p>
+                    </Col>
+                </Form>
             </div>
         );
     }

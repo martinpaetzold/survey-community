@@ -5,11 +5,11 @@ export default function Dashboard() {
     return (
         <Container>
             <Jumbotron>
-                <h1>Hello, world!</h1>
+                <h1>Welcome back!</h1>
                 <p>
-                    This is a simple hero unit, a simple jumbotron-style
-                    component for calling extra attention to featured content or
-                    information.
+                    Ut wisi enim ad minim veniam, quis nostrud exercitation
+                    ulliam corper suscipit lobortis nisl ut aliquip ex ea
+                    commodo consequat.
                 </p>
                 <p>
                     <Button variant="primary">Learn more</Button>
@@ -17,29 +17,20 @@ export default function Dashboard() {
             </Jumbotron>
             <CardDeck>
                 <Card style={{ width: "36rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_01.jpg" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
-                        </Card.Text>
+                        <Card.Title>Ex ea commodo consequat</Card.Title>
+                        <Card.Text>Ut wisi enim ad minim veniam.</Card.Text>
                         <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
                 </Card>
                 <Card style={{ width: "36rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_02.jpg" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
+                        <Card.Title>Lobortis nisl ut</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Quis nostrud exercitation ulliam corper suscipit
+                            lobortis nisl ut.
                         </Card.Text>
                         <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
@@ -47,59 +38,43 @@ export default function Dashboard() {
             </CardDeck>
             <CardDeck>
                 <Card style={{ width: "18rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_03.jpg" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Aliquip ex ea commodo consequat. Duis autem veleum
+                            iriure dolor in.
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="primary">Go!</Button>
                     </Card.Body>
                 </Card>
                 <Card style={{ width: "18rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_04.jpg" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Blandit praesent luptatum zzril delenit augue duis
+                            dolore te feugait nulla facilisi.
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="primary">Go!</Button>
                     </Card.Body>
                 </Card>
                 <Card style={{ width: "18rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_05.jpg" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Vel willum lunombro dolore eu feugiat nulla
+                            facilisis at vero eros et accumsan et.
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="primary">Go!</Button>
                     </Card.Body>
                 </Card>
                 <Card style={{ width: "18rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="background_image_default.jpg"
-                    />
+                    <Card.Img variant="top" src="card_06.jpg" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
                         <Card.Text>
-                            Some quick example text to build on the card title
-                            and make up the bulk of the cards content.
+                            Duis autem veleum iriure dolor in hendrerit in
+                            vulputate velit esse molestie consequat.
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="primary">Go!</Button>
                     </Card.Body>
                 </Card>
             </CardDeck>

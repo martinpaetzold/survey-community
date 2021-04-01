@@ -42,22 +42,12 @@ export default function Messages(props) {
                             {message.user == userId && (
                                 <div className="user-self">
                                     <span>{message.message_text} </span>
-                                    <img
-                                        className="profile-img-chat"
-                                        src={message.profile_picture_url}
-                                        alt={`${message.firstname} ${message.lastname}`}
-                                    />
                                     You, {message.time}
                                 </div>
                             )}
                             {message.user != userId && (
                                 <div className="user-other">
                                     <span>{message.message_text} </span>
-                                    <img
-                                        className="profile-img-chat"
-                                        src={message.profile_picture_url}
-                                        alt={`${message.firstname} ${message.lastname}`}
-                                    />
                                     {message.firstname}, {message.time}
                                 </div>
                             )}
