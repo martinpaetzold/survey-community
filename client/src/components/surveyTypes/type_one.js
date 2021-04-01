@@ -28,8 +28,8 @@ function sendDataToServer(survey, options) {
 }
 
 let Json2 = {
-    surveyId: "8450345c-1912-4e30-b293-7ef23f933287",
-    surveyPostId: "cf075257-923f-4458-9eb6-1e6a2d4e4484",
+    surveyId: "58936a84-2982-400b-bb1f-6812601a8b2e",
+    surveyPostId: "21ce12e2-5dad-457d-ace4-c759f81e42bc",
 };
 
 const MySurvey = (prop) => {
