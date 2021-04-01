@@ -10,29 +10,38 @@ export default function Dashboard() {
                     Ut wisi enim ad minim veniam, quis nostrud exercitation
                     ulliam corper suscipit lobortis nisl ut aliquip ex ea
                     commodo consequat.
+                    <br />
+                    You can also update your profile. Tell other something about
+                    you.
                 </p>
                 <p>
-                    <Button variant="primary">Learn more</Button>
+                    <Button variant="primary" href="/profile">
+                        Edit profile.
+                    </Button>
                 </p>
             </Jumbotron>
             <CardDeck>
                 <Card style={{ width: "36rem" }}>
                     <Card.Img variant="top" src="card_01.jpg" />
                     <Card.Body>
-                        <Card.Title>Ex ea commodo consequat</Card.Title>
-                        <Card.Text>Ut wisi enim ad minim veniam.</Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Card.Title>Our first survey</Card.Title>
+                        <Card.Text>
+                            We want to get to know you better. Why not answer a
+                            few questions when you have time?
+                        </Card.Text>
+                        <Button variant="primary">Open survey</Button>
                     </Card.Body>
                 </Card>
                 <Card style={{ width: "36rem" }}>
                     <Card.Img variant="top" src="card_02.jpg" />
                     <Card.Body>
-                        <Card.Title>Lobortis nisl ut</Card.Title>
+                        <Card.Title>The second survey</Card.Title>
                         <Card.Text>
-                            Quis nostrud exercitation ulliam corper suscipit
-                            lobortis nisl ut.
+                            Now let;&#39;s test your general knowledge of
+                            struggling with everyday life. Would you like to
+                            start the survey?
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="primary">Yes, open survey.</Button>
                     </Card.Body>
                 </Card>
             </CardDeck>
