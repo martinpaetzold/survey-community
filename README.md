@@ -1,6 +1,8 @@
+![Social network](https://user-images.githubusercontent.com/5154880/122949984-63e09480-d37c-11eb-8ea4-5340655958d7.png?raw=true "Social network project")
+
 # Survey Community
 
-This is my survey community project. Need to add some awesome description later.
+This is my survey community project.
 
 ## Database structure
 
